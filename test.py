@@ -1,5 +1,12 @@
 from perceptron.perceptron import Perceptron
+import pandas as pd
+import numpy as np
 
-p = Perceptron(False, 0.01, 100, 1, 0.5)
-p.visualize('datasets/dataset_1.csv')
+df = pd.read_csv('datasets/dataset_3.csv', names=['X1', 'X2', 'y'])
+df['y'] = df['y'].replace(0, -1)
+print(df.head())
+p = Perceptron(0.01, 20, 2, 0, '3', './images/')
+X = np.array(df[['X1', 'X2']])
+y = df['y']
+p.fit(X, y)
 
