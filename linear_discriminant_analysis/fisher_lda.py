@@ -3,6 +3,7 @@ Fisher's Linear Discriminant Analysis for 2 classes (with visualization)
 Author: Rohan Tammara
 Last Modified: 29/3/19
 """
+from scipy.optimize import fsolve
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,7 +11,7 @@ import scipy.stats as stats
 
 class FisherLDA:
 
-    def __init__(self, dataset):
+    def __init__(self, dataset=2):
         self.dataset = dataset
 
     def prepare_data(self):
@@ -51,7 +52,7 @@ class FisherLDA:
 
         return W, m
 
-    def plot(self, x1, x2, y, X, W, m):
+    def plot(self, x1, x2, y, X, W, m, show=True):
         # Convenience variables
         L = len(X)
         L2 = np.count_nonzero(y)
@@ -91,25 +92,47 @@ class FisherLDA:
         p2 = np.linspace(mu2 - k*sigma2, mu2 + k*sigma2)
         q2 = stats.norm.pdf(p2, mu2, sigma2)
         # Find the intersection point of distribution
-        #intersection_pt =
-
-        ### Plot ###
-        grid = plt.GridSpec(3,2)
-        plt.subplot(grid[0:2, :])
-        clr = ['orange' if i == 0 else 'green' for i in y]
-        clr_tr = ['red' if i == 0 else 'blue' for i in y]
-        plt.scatter(X[0], X[1], marker='o', color=clr, alpha=0.75)
-        plt.scatter(Xtr[0], Xtr[1], marker='.', color=clr_tr)
-        plt.xlim(np.min(X[0])-0.1, np.max(X[0])+0.1)
-        plt.ylim(np.min(X[1])-0.1, np.max(X[1])+0.1)
-        plt.plot(x_1, x_0, color='k')
-        plt.subplot(grid[2,:])
-        plt.plot(p1, q1, color='red')
-        plt.plot(p2, q2, color='blue')
-        #plt.plot([intersection_pt], 'g^')
-        plt.show()
+        intersection_pt = fsolve(lambda x : stats.norm.pdf(x, mu1, sigma1) - stats.norm.pdf(x, mu2, sigma2), 0)
+        if show:
+            ### Plot ###
+            grid = plt.GridSpec(3,2)
+            plt.subplot(grid[0:2, :])
+            plt.title("Scatter plot of data")
+            clr = ['orange' if i == 0 else 'green' for i in y]
+            clr_tr = ['red' if i == 0 else 'blue' for i in y]
+            plt.scatter(X[0], X[1], marker='o', color=clr, alpha=0.75, label='Original data')
+            plt.scatter(Xtr[0], Xtr[1], marker='.', color=clr_tr, label='Transformed data')
+            plt.xlim(np.min(X[0])-0.1, np.max(X[0])+0.1)
+            plt.ylim(np.min(X[1])-0.1, np.max(X[1])+0.1)
+            plt.plot(x_1, x_0, color='k', label="Discriminant")
+            plt.xlabel('Feature 1')
+            plt.ylabel('Feature 2')
+            plt.legend(loc = 'upper right')
+            plt.subplot(grid[2,:])
+            plt.title("Normal curves")
+            plt.plot(p1, q1, color='red', label="Class 1")
+            plt.plot(p2, q2, color='blue', label="Class 2")
+            plt.axvline(intersection_pt, color='g', ls='--', lw=0.75, label="Threshold =\n" + str(np.around(intersection_pt[0], decimals=3)))
+            plt.legend(loc='upper right')
+            plt.tight_layout()
+            mng = plt.get_current_fig_manager()
+            mng.window.showMaximized()
+            plt.savefig('images/dataset_' + str(self.dataset) + '_lda.png')
+            plt.show()
+        return intersection_pt
 
     def visualize(self):
         x1, x2, y, X = self.prepare_data()
         W, m = self.fit(x1, x2, y)
-        self.plot(x1, x2, y, X, W, m)
+        thresh = self.plot(x1, x2, y, X, W, m)
+
+    def predict(self,  x=None):
+        x1, x2, y, X = self.prepare_data()
+        W, m = self.fit(x1, x2, y)
+        thresh = self.plot(x1, x2, y, X, W, m, show=False)
+        assert x != None
+        xtr = np.dot(W.T, x)
+        if xtr < thresh:
+            print("Prediction: Class 1")
+        else:
+            print("Prediction: Class 2")

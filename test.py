@@ -12,5 +12,5 @@ X = np.array(df[['X1', 'X2']])
 y = df['y']
 p.fit(X, y)
 """
-disc = FisherLDA(2)
+disc = FisherLDA(1)
 disc.visualize()
