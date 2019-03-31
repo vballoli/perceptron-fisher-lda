@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to Fisher’s Linear Discriminant Analysis and Perceptron algorithms’s documentation! &#8212; Fisher&#39;s Linear Discriminant Analysis and Perceptron algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-linear_discriminant_analysis.fisher_lda">
+<span id="welcome-to-fisher-s-linear-discriminant-analysis-and-perceptron-algorithms-s-documentation"></span><h1>Welcome to Fisher’s Linear Discriminant Analysis and Perceptron algorithms’s documentation!<a class="headerlink" href="#module-linear_discriminant_analysis.fisher_lda" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="linear_discriminant_analysis.fisher_lda.FisherLDA">
+<em class="property">class </em><code class="descclassname">linear_discriminant_analysis.fisher_lda.</code><code class="descname">FisherLDA</code><span class="sig-paren">(</span><em>dataset=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linear_discriminant_analysis/fisher_lda.html#FisherLDA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linear_discriminant_analysis.fisher_lda.FisherLDA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Fisher’s Linear Discriminant Analysis with visualizing the one-dimensional line and threshold 
+by intersection of the normal distribution of the curves.</p>
+<dl class="method">
+<dt id="linear_discriminant_analysis.fisher_lda.FisherLDA.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linear_discriminant_analysis/fisher_lda.html#FisherLDA.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linear_discriminant_analysis.fisher_lda.FisherLDA.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of LDA.
+&#64;param x1: feature data related to Class 1
+&#64;param x2: feature data related to Class 2
+&#64;param y: class labels of the data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="linear_discriminant_analysis.fisher_lda.FisherLDA.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>y</em>, <em>X</em>, <em>W</em>, <em>m</em>, <em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linear_discriminant_analysis/fisher_lda.html#FisherLDA.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linear_discriminant_analysis.fisher_lda.FisherLDA.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plotting relevant graphs from the data and it’s results from LDA.
+&#64;param x1: feature data related to Class 1
+&#64;param x2: feature data related to Class 2
+&#64;param y: class labels of the data
+&#64;param X: all feature data. 
+&#64;param W: weight vector from LDA on the dataset
+&#64;param m: overall mean
+&#64;param show: boolean to show the plots</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="linear_discriminant_analysis.fisher_lda.FisherLDA.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>x=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linear_discriminant_analysis/fisher_lda.html#FisherLDA.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linear_discriminant_analysis.fisher_lda.FisherLDA.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the class label based on input data.
+&#64;param x: input feature data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="linear_discriminant_analysis.fisher_lda.FisherLDA.prepare_data">
+<code class="descname">prepare_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/linear_discriminant_analysis/fisher_lda.html#FisherLDA.prepare_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linear_discriminant_analysis.fisher_lda.FisherLDA.prepare_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method to return relevant data as [x1, x2, y, X] based on the dataset
+&#64;param x1: feature data related to Class 1
+&#64;param x2: feature data related to Class 2
+&#64;param y: class labels of the data
+&#64;param X: all feature data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="linear_discriminant_analysis.fisher_lda.FisherLDA.visualize">
+<code class="descname">visualize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/linear_discriminant_analysis/fisher_lda.html#FisherLDA.visualize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linear_discriminant_analysis.fisher_lda.FisherLDA.visualize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize LDA on dataset.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-perceptron.perceptron"></span><dl class="class">
+<dt id="perceptron.perceptron.Perceptron">
+<em class="property">class </em><code class="descclassname">perceptron.perceptron.</code><code class="descname">Perceptron</code><span class="sig-paren">(</span><em>learning_rate</em>, <em>epochs</em>, <em>input_size</em>, <em>threshold</em>, <em>dataset_label</em>, <em>img_dir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perceptron/perceptron.html#Perceptron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perceptron.perceptron.Perceptron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the perceptron algorithm.</p>
+<dl class="method">
+<dt id="perceptron.perceptron.Perceptron.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perceptron/perceptron.html#Perceptron.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perceptron.perceptron.Perceptron.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activation function defined: 1 if x &gt; threshold else -1.
+&#64;param x: activation function input</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perceptron.perceptron.Perceptron.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perceptron/perceptron.html#Perceptron.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perceptron.perceptron.Perceptron.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the perceptron based on input training data and class labels.
+&#64;param X: training feature data.
+&#64;param y: class labels for the given training data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perceptron.perceptron.Perceptron.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perceptron/perceptron.html#Perceptron.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perceptron.perceptron.Perceptron.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the class label for input test data
+&#64;param X: test data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perceptron.perceptron.Perceptron.visualize_data">
+<code class="descname">visualize_data</code><span class="sig-paren">(</span><em>w</em>, <em>name=None</em>, <em>epoch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perceptron/perceptron.html#Perceptron.visualize_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perceptron.perceptron.Perceptron.visualize_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the perceptron algorithm for given weight vector and training data.
+&#64;param w: Trained weight vector from teh dataset.
+&#64;param name: Name of the plot.
+&#64;param epoch: Epoch iteration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Fisher’s Linear Discriminant Analysis and Perceptron algorithms’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Vaibhav Balloli, Rohan Tammara and Sachin P.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
