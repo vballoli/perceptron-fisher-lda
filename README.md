@@ -13,3 +13,7 @@ This LDA algorithm uses Fisher's criterion to determine the weight vector and th
 The perceptron algorithm implemented uses the activation function: f(x) = 1 if x >= threshold else -1, threshold usually set to zero.
 
 `images/` folder contains GIFs of the change of decision boundary as the perceptron updates the weight vector based on the error of prediction.
+
+## Run instructions 
+
+Run `python3 test.py` to run the Perceptron and Fisher's LDA on dataset_1 inside `datasets/` directory.

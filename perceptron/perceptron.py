@@ -1,4 +1,3 @@
-from utils.utility import log
 import numpy as np
 import pandas as pd
 import pickle
@@ -11,14 +10,28 @@ class Perceptron:
     """
 
     def __init__(self, learning_rate, epochs, input_size, threshold, dataset_label, img_dir):
+        """
+        Initialize class parameters
+        @param learning_rate: Learning rate is magnitude of step taken along the gradient direction
+        @param epochs: Total epochs the data must be trained on.
+        @param input_size: Number of features for input data.
+        @param threshold: Threshold for the activation function ot classify as 1 or -1.
+        @param dataset_label: String to label the given trainig data
+        @param img_dir: Destination path for the images of the plots of the perceptron algorithm.
+        """
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.W = np.ones(input_size+1) # +1 for bias
         self.threshold = threshold
         self.dataset_label = dataset_label
         self.img_dir = img_dir
+        self.trained = False
 
     def activation(self, x):
+        """
+        Activation function defined: 1 if x > threshold else -1.
+        @param x: activation function input
+        """
         if x >= self.threshold:
             prediction = 1
         else:
@@ -26,6 +39,11 @@ class Perceptron:
         return prediction
 
     def fit(self, X, y):
+        """
+        Train the perceptron based on input training data and class labels.
+        @param X: training feature data.
+        @param y: class labels for the given training data.
+        """
         w = self.W
         self.X = X
         self.y = y
@@ -39,23 +57,37 @@ class Perceptron:
                     w = w + self.learning_rate * X[i] * y[i]
             self.visualize_data(w, self.dataset_label, epoch+1)
         self.w = w
+        self.trained = True
 
-    def visualize(self):
-        w = self.w
-        X = self.X
-        x = np.random.random_sample(2)
-        y = (w[0] + (w[1] * x)) / w[2]
-        plt.plot(x, y)
-        plt.show()
+    def predict(self, X):
+        """
+        Predict the class label for input test data
+        @param X: test data.
+        """
+        if self.trained:
+            try:
+                return self.activation(np.dot(self.w, X))
+            except Exception as e:
+                print("Error:", '\t', e)
+                return None
+        else:
+            print("Untrained pereceptron. No prediction")
+            return None
+
+
 
     def visualize_data(self, w, name=None, epoch=None):
+        """
+        Visualize the perceptron algorithm for given weight vector and training data.
+        @param w: Trained weight vector from teh dataset.
+        @param name: Name of the plot.
+        @param epoch: Epoch iteration.
+        """
         X = self.X
-        #x = np.random.random_sample(100)
         if w is not None:
             x = np.array([-3.8, 3])
             y = (w[0] + w[1] * x) / w[2] * -1
             plt.plot(x, y, c='green')
-        #plt.scatter('X1', 'X2', data=pd.read_csv(path, names=['X1', 'X2', 'y']), hue='y', fit_reg=False)
         y = self.y
         colour = ['red' if i== 1 else 'blue' for i in y]
         plt.scatter(X.T[0], X.T[1], c=colour)

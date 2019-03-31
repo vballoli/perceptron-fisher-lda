@@ -1,8 +1,3 @@
-"""
-Fisher's Linear Discriminant Analysis for 2 classes (with visualization)
-Author: Rohan Tammara
-Last Modified: 29/3/19
-"""
 from scipy.optimize import fsolve
 import numpy as np
 import pandas as pd
@@ -10,11 +5,25 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 
 class FisherLDA:
+    """
+    Implementation of Fisher's Linear Discriminant Analysis with visualizing the one-dimensional line and threshold 
+    by intersection of the normal distribution of the curves.
+    """
 
     def __init__(self, dataset=2):
+        """
+        Initialize with dataset number to perform LDA on.
+        """
         self.dataset = dataset
 
     def prepare_data(self):
+        """
+        Helper method to return relevant data as [x1, x2, y, X] based on the dataset
+        @param x1: feature data related to Class 1
+        @param x2: feature data related to Class 2
+        @param y: class labels of the data
+        @param X: all feature data. 
+        """
         ### Prepare data ###
         data = pd.read_csv('datasets/dataset_' + str(self.dataset) + '.csv', header=None, prefix='D')
         data = data.iloc[:, 1:]
@@ -29,6 +38,12 @@ class FisherLDA:
         return x1, x2, y, X
 
     def fit(self, x1, x2, y):
+        """
+        Implementation of LDA.
+        @param x1: feature data related to Class 1
+        @param x2: feature data related to Class 2
+        @param y: class labels of the data
+        """
         l1 = len(x1)
         l2 = len(x2)
 
@@ -53,6 +68,16 @@ class FisherLDA:
         return W, m
 
     def plot(self, x1, x2, y, X, W, m, show=True):
+        """
+        Plotting relevant graphs from the data and it's results from LDA.
+        @param x1: feature data related to Class 1
+        @param x2: feature data related to Class 2
+        @param y: class labels of the data
+        @param X: all feature data. 
+        @param W: weight vector from LDA on the dataset
+        @param m: overall mean
+        @param show: boolean to show the plots
+        """
         # Convenience variables
         L = len(X)
         L2 = np.count_nonzero(y)
@@ -122,11 +147,18 @@ class FisherLDA:
         return intersection_pt
 
     def visualize(self):
+        """
+        Visualize LDA on dataset.
+        """
         x1, x2, y, X = self.prepare_data()
         W, m = self.fit(x1, x2, y)
         thresh = self.plot(x1, x2, y, X, W, m)
 
     def predict(self,  x=None):
+        """
+        Predicts the class label based on input data.
+        @param x: input feature data
+        """
         x1, x2, y, X = self.prepare_data()
         W, m = self.fit(x1, x2, y)
         thresh = self.plot(x1, x2, y, X, W, m, show=False)

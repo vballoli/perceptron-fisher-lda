@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 # Pereceptron Test
-df = pd.read_csv('datasets/dataset_3.csv', names=['X1', 'X2', 'y'])
+df = pd.read_csv('datasets/dataset_1.csv', names=['X1', 'X2', 'y'])
 df['y'] = df['y'].replace(0, -1)
 print(df.head())
 p = Perceptron(0.01, 20, 2, 0, '3', './images/')
